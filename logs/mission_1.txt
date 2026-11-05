@@ -1,0 +1,944 @@
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey
+$ git clone https://github.com/jinnnii/ai-codyssey.git .
+Cloning into '.'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (3/3), done.
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ git config --global user.name "jinnnii"
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ git config --global user.email "jinnnii@naver.com"
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ git config --list
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=schannel
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+pull.rebase=false
+credential.helper=manager
+credential.https://dev.azure.com.usehttppath=true
+user.email=jinnnii@naver.com
+user.name=jinnnii
+init.defaultbranch=main
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ pwd
+/d/02.Projects/17.codyssey
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ mkdir -p app/src
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ touch app/src/index.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi app/src/index.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat app/src/index.html
+<h1>Hello Codyssey!</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cp app/src/index.html app/src/copy.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ mv app/src/copy.html app/src/main.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ ls -al app/src
+total 2
+drwxr-xr-x 1 jinnnii 197121  0 Nov  5 12:17 ./
+drwxr-xr-x 1 jinnnii 197121  0 Nov  5 12:16 ../
+-rw-r--r-- 1 jinnnii 197121 25 Nov  5 12:16 index.html
+-rw-r--r-- 1 jinnnii 197121 25 Nov  5 12:17 main.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker --version
+Docker version 28.4.0, build d8eb465
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker info
+Client:
+ Version:    28.4.0
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  ai: Docker AI Agent - Ask Gordon (Docker Inc.)
+    Version:  v1.9.11
+    Path:     C:\Program Files\Docker\cli-plugins\docker-ai.exe
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.28.0-desktop.1
+    Path:     C:\Program Files\Docker\cli-plugins\docker-buildx.exe
+  cloud: Docker Cloud (Docker Inc.)
+    Version:  v0.4.27
+    Path:     C:\Program Files\Docker\cli-plugins\docker-cloud.exe
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.39.2-desktop.1
+    Path:     C:\Program Files\Docker\cli-plugins\docker-compose.exe
+  debug: Get a shell into any image or container (Docker Inc.)
+    Version:  0.0.42
+    Path:     C:\Program Files\Docker\cli-plugins\docker-debug.exe
+  desktop: Docker Desktop commands (Docker Inc.)
+    Version:  v0.2.0
+    Path:     C:\Program Files\Docker\cli-plugins\docker-desktop.exe
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.31
+    Path:     C:\Program Files\Docker\cli-plugins\docker-extension.exe
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.4.0
+    Path:     C:\Program Files\Docker\cli-plugins\docker-init.exe
+  mcp: Docker MCP Plugin (Docker Inc.)
+    Version:  v0.18.0
+    Path:     C:\Program Files\Docker\cli-plugins\docker-mcp.exe
+  model: Docker Model Runner (Docker Inc.)
+    Version:  v0.1.40
+    Path:     C:\Program Files\Docker\cli-plugins\docker-model.exe
+  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc.)
+    Version:  0.6.0
+    Path:     C:\Program Files\Docker\cli-plugins\docker-sbom.exe
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.18.3
+    Path:     C:\Program Files\Docker\cli-plugins\docker-scout.exe
+
+Server:
+ Containers: 9
+  Running: 6
+  Paused: 0
+  Stopped: 3
+ Images: 13
+ Server Version: 28.4.0
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Discovered Devices:
+  cdi: docker.com/gpu=webgpu
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 nvidia runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 05044ec0a9a75232cad458027ca83437aae3f4da
+ runc version: v1.2.5-0-g59923ef
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.6.87.2-microsoft-standard-WSL2
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 22
+ Total Memory: 15.35GiB
+ Name: docker-desktop
+ ID: 7dc045ba-bd98-4a1f-b208-878fb1745cbf
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Labels:
+  com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker run -it ubuntu bash
+root@a4204fc8e26a:/# ls
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+root@a4204fc8e26a:/# echo "hello world"
+hello world
+root@a4204fc8e26a:/# exit
+exit
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ touch Dockerfile
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi Dockerfile
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat Dockerfile
+# 기초 도커 이미지
+FROM nginx:alpine
+# 도커 이미지 라벨(타이틀) 설정
+LABEL org.opencontainers.image.title="my-custom-nginx"
+# 컨테이너에서 사용되는 환경 변수 설정
+ENV APP_ENV=dev
+COPY ./app/src /usr/share/nginx/html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker build -t my-custom-nginx:1.0 .
+[+] Building 2.2s (7/7) FINISHED                           docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 290B                                       0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine            1.3s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.1s
+ => => transferring context: 195B                                          0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:785835ea65db4bba6f02  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:785835ea65db4bba6f02  0.1s
+ => CACHED [2/2] COPY ./app/src /usr/share/nginx/html                      0.0s
+ => exporting to image                                                     0.3s
+ => => exporting layers                                                    0.0s
+ => => exporting manifest sha256:bbd9df7960c567c84fb484ed9314fd440259b42d  0.0s
+ => => exporting config sha256:c91f222682c0fef96b97ebbbd6ac2378f7c62b9ba3  0.0s
+ => => exporting attestation manifest sha256:a797d7f6bf9b3c23db2fb3083026  0.1s
+ => => exporting manifest list sha256:ee7b611c1d6c8dab33f8cbf61d47b0bed18  0.0s
+ => => naming to docker.io/library/my-custom-nginx:1.0                     0.0s
+ => => unpacking to docker.io/library/my-custom-nginx:1.0                  0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/z2tq59dndie5e089o9uga47cy
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker images
+REPOSITORY                    TAG         IMAGE ID       CREATED         SIZE
+my-custom-nginx               1.0         ee7b611c1d6c   6 minutes ago   93.6MB
+python                        3.12-slim   b18b261e1b49   8 days ago      177MB
+cloudflare/cloudflared        latest      9b49eed8f628   4 weeks ago     97.6MB
+gvenzl/oracle-free            latest      7ed34d0ade89   2 months ago    4.07GB
+hello-world                   latest      c567b231f656   7 months ago    20.4kB
+redis                         latest      acb90ced0bd7   14 months ago   200MB
+provectuslabs/kafka-ui        latest      8f2ff02d64b0   2 years ago     449MB
+confluentinc/cp-kafka         7.6.0       24cdd3a7fa89   2 years ago     1.31GB
+confluentinc/cp-kafka         7.5.0       fbbb6fa11b25   3 years ago     1.33GB
+mariadb                       10.4.24     988c5e2073c8   4 years ago     552MB
+ngrok/ngrok                   latest      14d80d083e5b   56 years ago    418MB
+ubuntu                        latest      6a06111c3b0a   56 years ago    159MB
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker ps
+CONTAINER ID   IMAGE                           COMMAND                   CREATED        STATUS        PORTS                                             NAMES
+c3f2f1c85cda   provectuslabs/kafka-ui:latest   "/bin/sh -c 'java --…"   5 months ago   Up 26 hours   0.0.0.0:8989->8080/tcp, [::]:8989->8080/tcp       local-kafka-ui
+1ff81457f493   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago   Up 26 hours   0.0.0.0:9094->9094/tcp, [::]:9094->9094/tcp       local-kafka2
+62d475f27754   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago   Up 26 hours   0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp       local-kafka1
+ba269a89fd29   redis:latest                    "docker-entrypoint.s…"   5 months ago   Up 26 hours   6379/tcp                                          01redis-redis-slave-1
+afc98d5e6df0   redis:latest                    "docker-entrypoint.s…"   6 months ago   Up 26 hours   0.0.0.0:26379->26379/tcp, [::]:26379->26379/tcp   01redis-redis-sentinel-1
+85335e144c63   redis:latest                    "docker-entrypoint.s…"   6 months ago   Up 26 hours   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       redis-master
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker ps -a
+CONTAINER ID   IMAGE                           COMMAND                   CREATED              STATUS                          PORTS
+                NAMES
+a4204fc8e26a   ubuntu                          "bash"                    About a minute ago   Exited (0) About a minute ago
+                boring_shaw
+ed9bdc1e05fa   hello-world                     "/hello"                  About a minute ago   Exited (0) About a minute ago
+                thirsty_tu
+52f39b05f583   mariadb:10.4.24                 "docker-entrypoint.s…"   7 days ago           Exited (0) 2 days ago
+f2a26590d5d3   gvenzl/oracle-free              "container-entrypoin…"   8 weeks ago          Exited (255) 3 weeks ago        0.0.0.0:1521->1521/tcp
+               oracle-temp
+c3f2f1c85cda   provectuslabs/kafka-ui:latest   "/bin/sh -c 'java --…"   5 months ago         Up 26 hours                     0.0.0.0:8989->8080/tcp, [::]:8989->8080/tcp       local-kafka-ui
+1ff81457f493   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago         Up 26 hours                     0.0.0.0:9094->9094/tcp, [::]:9094->9094/tcp       local-kafka2
+62d475f27754   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago         Up 26 hours                     0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp       local-kafka1
+ba269a89fd29   redis:latest                    "docker-entrypoint.s…"   5 months ago         Up 26 hours                     6379/tcp
+               01redis-redis-slave-1
+afc98d5e6df0   redis:latest                    "docker-entrypoint.s…"   6 months ago         Up 26 hours                     0.0.0.0:26379->26379/tcp, [::]:26379->26379/tcp   01redis-redis-sentinel-1
+85335e144c63   redis:latest                    "docker-entrypoint.s…"   6 months ago         Up 26 hours                     0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       redis-master
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker rm -f ed9bdc1e05fa
+ed9bdc1e05fa
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker rm -f a4204fc8e26a
+a4204fc8e26a
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker ps -a
+CONTAINER ID   IMAGE                           COMMAND                   CREATED        STATUS                     PORTS
+     NAMES
+52f39b05f583   mariadb:10.4.24                 "docker-entrypoint.s…"   7 days ago     Exited (0) 2 days ago
+f2a26590d5d3   gvenzl/oracle-free              "container-entrypoin…"   8 weeks ago    Exited (255) 3 weeks ago   0.0.0.0:1521->1521/tcp
+    oracle-temp
+c3f2f1c85cda   provectuslabs/kafka-ui:latest   "/bin/sh -c 'java --…"   5 months ago   Up 26 hours                0.0.0.0:8989->8080/tcp, [::]:8989->8080/tcp       local-kafka-ui
+1ff81457f493   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago   Up 26 hours                0.0.0.0:9094->9094/tcp, [::]:9094->9094/tcp       local-kafka2
+62d475f27754   confluentinc/cp-kafka:7.5.0     "/etc/confluent/dock…"   5 months ago   Up 26 hours                0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp       local-kafka1
+ba269a89fd29   redis:latest                    "docker-entrypoint.s…"   5 months ago   Up 26 hours                6379/tcp
+    01redis-redis-slave-1
+afc98d5e6df0   redis:latest                    "docker-entrypoint.s…"   6 months ago   Up 26 hours                0.0.0.0:26379->26379/tcp, [::]:26379->26379/tcp   01redis-redis-sentinel-1
+85335e144c63   redis:latest                    "docker-entrypoint.s…"   6 months ago   Up 26 hours                0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       redis-master
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker stats --no-stream
+CONTAINER ID   NAME                       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+c3f2f1c85cda   local-kafka-ui             0.12%     718.8MiB / 15.35GiB   4.57%     61.7MB / 6.84MB   97.8MB / 21.5MB   87
+1ff81457f493   local-kafka2               1.00%     1.174GiB / 15.35GiB   7.65%     17.7MB / 42.2MB   130MB / 1.18GB    114
+62d475f27754   local-kafka1               1.09%     1.18GiB / 15.35GiB    7.68%     19.1MB / 56.4MB   140MB / 1.03GB    112
+ba269a89fd29   01redis-redis-slave-1      0.27%     6.32MiB / 15.35GiB    0.04%     24.1MB / 13.3MB   422kB / 47.1MB    6
+afc98d5e6df0   01redis-redis-sentinel-1   0.48%     3.535MiB / 15.35GiB   0.02%     20kB / 13.8kB     299kB / 4.1kB     6
+85335e144c63   redis-master               0.29%     11.8MiB / 15.35GiB    0.08%     46.9MB / 1.12GB   28.6MB / 47MB     6
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi .env
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat .env
+WEB_PORT1=8888
+WEB_PORT2=8889
+APP_MODE=dev
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi docker-compose.yml
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat docker-compose.yml
+version: '3.8'
+services:
+  web-service-1:
+    image: my-custom-nginx:1.0
+    container_name: compose-web-1
+    ports:
+      - "${WEB_PORT1:-8081}:80"
+    environment:
+      - NODE_ENV=${APP_MODE}
+    networks:
+      - app-network
+  web-service-2:
+    image: nginx:alpine
+    container_name: compose-web-2
+    ports:
+      - "${WEB_PORT2:-8082}:80"
+    networks:
+      - app-network
+    volumnes:
+      - ./app/src:/usr/share/nginx/html
+networks:
+  app-network:
+    driver: bridge
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose up -d
+validating D:\02.Projects\17.codyssey\docker-compose.yml: services.web-service-2 additional properties 'volumnes' not allowed
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat docker-compose.yml
+version: '3.8'
+services:
+  web-service-1:
+    image: my-custom-nginx:1.0
+    container_name: compose-web-1
+    ports:
+      - "${WEB_PORT1:-8081}:80"
+    environment:
+      - NODE_ENV=${APP_MODE}
+    networks:
+      - app-network
+  web-service-2:
+    image: nginx:alpine
+    container_name: compose-web-2
+    ports:
+      - "${WEB_PORT2:-8082}:80"
+    networks:
+      - app-network
+    volumnes:
+      - ./app/src:/usr/share/nginx/html
+networks:
+  app-network:
+    driver: bridge
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi docker-compose.yml
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat docker-compose.yml
+version: '3.8'
+services:
+  web-service-1:
+    image: my-custom-nginx:1.0
+    container_name: compose-web-1
+    ports:
+      - "${WEB_PORT1:-8081}:80"
+    environment:
+      - NODE_ENV=${APP_MODE}
+    networks:
+      - app-network
+  web-service-2:
+    image: nginx:alpine
+    container_name: compose-web-2
+    ports:
+      - "${WEB_PORT2:-8082}:80"
+    networks:
+      - app-network
+    volumes:
+      - ./app/src:/usr/share/nginx/html
+networks:
+  app-network:
+    driver: bridge
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose up -d
+time="2026-11-05T12:24:24+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 1/1
+ ✔ web-service-2 Pulled                                                    2.1s
+[+] Running 3/3
+ ✔ Network 17codyssey_app-network  Cre...                                  0.1s
+ ✔ Container compose-web-2         Started                                 0.7s
+ ✔ Container compose-web-1         Started                                 0.7s
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose ps
+time="2026-11-05T12:24:34+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+NAME            IMAGE                 COMMAND                   SERVICE
+CREATED         STATUS         PORTS
+compose-web-1   my-custom-nginx:1.0   "/docker-entrypoint.…"   web-service-1   7 seconds ago   Up 6 seconds   0.0.0.0:8888->80/tcp, [::]:8888->80/tcp
+compose-web-2   nginx:alpine          "/docker-entrypoint.…"   web-service-2   7 seconds ago   Up 6 seconds   0.0.0.0:8889->80/tcp, [::]:8889->80/tcp
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose logs
+time="2026-11-05T12:24:47+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+compose-web-2  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+compose-web-2  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+compose-web-2  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+compose-web-2  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+compose-web-2  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+compose-web-2  | /docker-entrypoint.sh: Configuration complete; ready for start up
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: using the "epoll" event method
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: nginx/1.31.8
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+compose-web-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+compose-web-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+compose-web-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+compose-web-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+compose-web-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+compose-web-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: using the "epoll" event method
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: nginx/1.31.8
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker processes
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker processes
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 30
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 31
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 32
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 33
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 34
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 35
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 30
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 36
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 37
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 38
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 39
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 40
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 41
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 42
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 43
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 44
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 45
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 46
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 47
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 48
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 49
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 50
+compose-web-2  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 51
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 31
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 32
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 33
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 34
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 35
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 36
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 37
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 38
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 39
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 40
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 41
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 42
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 43
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 44
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 45
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 46
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 47
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 48
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 49
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 50
+compose-web-1  | 2026/11/05 03:24:27 [notice] 1#1: start worker process 51
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker exec -it compose-web-1 sh
+/ # ls -al /usr/share/nginx/html
+total 20
+drwxr-xr-x    1 root     root          4096 Nov  5 03:12 .
+drwxr-xr-x    1 root     root          4096 Oct 21 22:47 ..
+-rw-r--r--    1 root     root           497 Oct 21 17:54 50x.html
+-rwxr-xr-x    1 root     root            25 Nov  5 03:08 index.html
+-rwxr-xr-x    1 root     root            25 Nov  5 03:08 main.html
+/ # chmod -R 644 /usr/share/nginx/html
+/ # ls -al /usr/share/nginx/html
+total 28
+drw-r--r--    1 root     root          4096 Nov  5 03:12 .
+drwxr-xr-x    1 root     root          4096 Oct 21 22:47 ..
+-rw-r--r--    1 root     root           497 Oct 21 17:54 50x.html
+-rw-r--r--    1 root     root            25 Nov  5 03:08 index.html
+-rw-r--r--    1 root     root            25 Nov  5 03:08 main.html
+/ # chmod 755 /usr/share/nginx/html
+/ # ls -al /usr/share/nginx/html
+total 28
+drwxr-xr-x    1 root     root          4096 Nov  5 03:12 .
+drwxr-xr-x    1 root     root          4096 Oct 21 22:47 ..
+-rw-r--r--    1 root     root           497 Oct 21 17:54 50x.html
+-rw-r--r--    1 root     root            25 Nov  5 03:08 index.html
+-rw-r--r--    1 root     root            25 Nov  5 03:08 main.html
+/ # ls -ld /usr/share/nginx/html
+drwxr-xr-x    1 root     root          4096 Nov  5 03:12 /usr/share/nginx/html
+/ # ls -l /usr/share/nginx/html/index.html
+-rw-r--r--    1 root     root            25 Nov  5 03:08 /usr/share/nginx/html/index.html
+/ # wget -qO- http://compose-web-2:8889
+wget: can't connect to remote host (172.22.0.3): Connection refused
+/ # wget -qO- http://compose-web-1
+<h1>Hello Codyssey!</h1>
+/ # wget -qO- http://compose-web-2
+<h1>Hello Codyssey!</h1>
+/ # wget -qO- http://compose-web-1
+<h1>Hello Codyssey!</h1>
+/ # exit
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8888
+<h1>Hello Codyssey!</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8889
+<h1>Hello Codyssey!</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi app/src/
+index.html  main.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi app/src/
+index.html  main.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ vi app/src/index.html
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ cat app/src/index.html
+<h1>Hello Codyssey! with docker</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8888
+<h1>Hello Codyssey!</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8889
+<h1>Hello Codyssey! with docker</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose down
+time="2026-11-05T13:41:33+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 3/3
+ ✔ Container compose-web-1         Removed                                 0.5s
+ ✔ Container compose-web-2         Removed                                 0.6s
+ ✔ Network 17codyssey_app-network  Rem...                                  0.4s
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ docker compose up
+time="2026-11-05T13:41:42+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 3/3
+ ✔ Network 17codyssey_app-network  Cre...                                  0.1s
+ ✔ Container compose-web-2         Created                                 0.2s
+ ✔ Container compose-web-1         Created                                 0.2s
+Attaching to compose-web-1, compose-web-2
+compose-web-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+compose-web-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+compose-web-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+compose-web-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+compose-web-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+compose-web-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+compose-web-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: using the "epoll" event method
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: nginx/1.31.8
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+compose-web-2  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 104
+
+
+compose-web-2  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker processes
+
+compose-web-2  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of 
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 31
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 32
+compose-web-2  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+
+
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 33
+compose-web-2  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 34
+
+compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 35
+
+v View in Docker Desktop   o View Config   w Enable Watch
+compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 36
+compose-web-2  | /docker-entrypoint.sh: Configuration complete; ready for start up
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 37
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: using the "epoll" event method
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 38
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: nginx/1.31.8
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 40
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 41
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 42
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker processes
+
+
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 43
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 30
+
+
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 31
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 44
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 45
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 32
+
+
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 46
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 33
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 47
+
+v View in Docker Desktop   o View Config   w Enable Watch
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 48
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 49
+
+
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 36
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 50
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 37
+compose-web-1  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 51
+
+
+
+
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 38
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 39
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 40
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 41
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 42
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 43
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 44
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 45
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 46
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 47
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 48
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 49
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 50
+compose-web-2  | 2026/11/05 04:41:43 [notice] 1#1: start worker process 51
+Gracefully Stopping... press Ctrl+C again to force
+
+ Container compose-web-2  Stopping
+ Container compose-web-1  Stopping
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v View in Docker Desktop   o View Config   w Enable Watch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v View in Docker Desktop   o View Config   w Enable Watch
+
+
+
+
+
+v View in Docker Desktop   o View Config   w Enable Watch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+compose-web-2 exited with code 0
+ Container compose-web-2  Stopped
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Container compose-web-1  Stopped
+
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)Watch
+$ docker compose up -d
+time="2026-11-05T13:41:53+09:00" level=warning msg="D:\\02.Projects\\17.codyssey\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 2/2
+ ✔ Container compose-web-2  Started                                        0.5s
+ ✔ Container compose-web-1  Started                                        0.4s
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8888
+<h1>Hello Codyssey!</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ curl -s http://localhost:8889
+<h1>Hello Codyssey! with docker</h1>
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .env
+        Dockerfile
+        app/
+        docker-compose.yml
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$

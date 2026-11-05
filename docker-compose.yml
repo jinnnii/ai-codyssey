@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  web-service-1:
+    image: my-custom-nginx:1.0
+    container_name: compose-web-1
+    ports:
+      - "${WEB_PORT1:-8081}:80"
+    environment:
+      - NODE_ENV=${APP_MODE}
+    networks:
+      - app-network
+  web-service-2:
+    image: nginx:alpine
+    container_name: compose-web-2
+    ports:
+      - "${WEB_PORT2:-8082}:80"
+    networks:
+      - app-network
+    volumes:
+      - ./app/src:/usr/share/nginx/html
+networks:
+  app-network:
+    driver: bridge

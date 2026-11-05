@@ -153,11 +153,22 @@ drwxr-xr-x 1 jinnnii 197121  0 Nov  5 12:16 ../
 - 절대 경로: 최상위 루트 디렉토리에서 시작하는 고유한 전체 주소
     - Windows: C 나 D 드라이브에서 시작, `\` 으로 경로 표현, `D:\\Users\Admin\Documents\test.py`
     - Linux/MacOS: `/` 으로 경로 시작 및 표현, `/home/admin/test.py`
+    - 예시: `vi /home/admin/test.py`
 - 상대경로: 현재 위치한 디렉토리 기준으로 한 주소
     - 현재 디렉토리: `./`
     - 상위 디렉토리: `../`
+    - 예시: `vi ./test.py`
 
 ### 3. 파일 권한 실습
+
+- 기존 파일
+    - 생성자: 읽기, 쓰기, 실행
+    - 그룹: 읽기, 실행
+    - 기타: 읽기, 실행
+- 변경 파일: 파일 자체가 실행파일이 아닌, 코드파일이므로 권한을 다음과 같이 변경
+    - 생성자: 읽기, 쓰기, 실행
+    - 그룹: 읽기, 쓰기
+    - 기타: 읽기, 쓰기
 
 ```bash
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -189,7 +200,6 @@ drwxr-xr-x    1 root     root          4096 Oct 21 22:47 ..
 drwxr-xr-x    1 root     root          4096 Nov  5 03:12 /usr/share/nginx/html
 / # ls -l /usr/share/nginx/html/index.html
 -rw-r--r--    1 root     root            25 Nov  5 03:08 /usr/share/nginx/html/index.html
-
 ```
 
 #### ※ 파일 권한
@@ -352,6 +362,24 @@ afc98d5e6df0   01redis-redis-sentinel-1   0.48%     3.535MiB / 15.35GiB   0.02% 
 85335e144c63   redis-master               0.29%     11.8MiB / 15.35GiB    0.08%     46.9MB / 1.12GB   28.6MB / 47MB     6
 ```
 
+#### ※ Docker Images: 이미지 목록
+
+- TAG: 이미지의 버전, 동일한 이름의 이미지라도, 태그를 통해 배포 버전을 다르게 관리할 수 있음
+- IMAGE ID: 이미지의 고유 식별자
+- CREATED: 이미지가 빌드된 시점, 최신 빌드 여부 확인
+
+#### ※ Docker Containers: 컨테이너 목록
+
+- STATUS: 컨테이너 상태(Up: 실행 중, Exited: 종료)
+- NAMES: 컨테이너 별칭, 직접 지정하지 않으면 무작위로 생성되며, Container ID 대신 사용이 가능
+- PORTS: 호스트와 컨테이너 간의 포트포워딩 연결 정보
+
+#### ※ Docker Images vs Container
+
+- Image: 애플리케이션 실행에 필요한 모든 환경이 포함된 **읽기전용** 스냅샷 (정적 상태)
+- Container: 이미지를 실행한 **런타임 인스턴스**. 쓰기 가능한 레이어가 추가된 상태 (동적 상태)
+-
+
 ### 6. 컨테이너 실행 및 격리 실습
 
 - hello-world
@@ -396,14 +424,19 @@ root@a4204fc8e26a:/# exit
 exit
 ```
 
+**※ hello-world 동작 원리:**
+
+1. Docker 클라이언트가 데몬에 요청
+2. 데몬이 로컬에 이미지가 없으면 Docker Hub에서 Pull
+3. 이미지를 기반으로 컨테이너 생성
+4. 컨테이너 내부 실행 결과를 터미널로 출력.
+
 ### 7. Dockerfile 기반 커스텀 이미지 제작
 
+- Dockerfile
 - `Dockerfile` 파일 생성 및 내용:
 
 ```Dockerfile
-jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
-$ touch Dockerfile
-
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
 $ vi Dockerfile
 
@@ -447,10 +480,21 @@ View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux
 
 ```
 
+#### ※ Dockerfile 이미지 태그
+
+- `1.0` 등 명시적으로 버전 태그를 달아두는 경우, 변경 이력을 관리하기에 안전
+- `latest` 태그만 사용될 경우, 나중에 이미지가 업데이트되었을 때 어떤 버전이 실행 중인지 파악하기 어렵고, 롤백이 불가능해짐
+
+#### ※ Dockerfile 빌드 캐시 활용
+
+- 도커는 빌드 시, 변경되지 않은 파일에 대해 재사용을하여 빌드 속도를 줄임 (캐싱)
+- 그러나, 최신 상태를 강제로 반영해야할 때는 빌드 명령어에 `--no-cahce` 옵션을 추가
+
 ### 8. 포트 매핑 및 브라우저 접속 증거
 
 - 도커 컴포즈 파일(docker-compose.yml) 을 통해 웹 서비스 2개를 서로 다른 포트로 매핑하여 구동 및 검증
-- `.env` 파일로 환경 변수 설정:
+
+1. `.env` 파일로 환경 변수 설정:
 
 ```bash
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -464,7 +508,7 @@ APP_MODE=dev
 
 ```
 
-- `docker-compose.yml` 내용:
+2.  `docker-compose.yml` 설정정:
 
 ```yml
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -497,7 +541,7 @@ networks:
     driver: bridge
 ```
 
-- 도커 컴포즈 파일 실행:
+3. 도커 컴포즈 파일 실행:
 
 ```bash
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -537,7 +581,7 @@ compose-web-2  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsub
 (생략)
 ```
 
-- 웹 서버 접속 테스트 (컨테이너 간 접속, 80번):
+4. 웹 서버 접속 테스트 (컨테이너 간 접속, 80번):
 
 ```bash
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -549,7 +593,7 @@ $ docker exec -it compose-web-1 sh
 / # exit
 ```
 
-- 웹 서버 접속 테스트 (호스트-컨테이너 접속, 8888번 , 8889번):
+5. 웹 서버 접속 테스트 (호스트-컨테이너 접속, 8888번 , 8889번):
 
 ```bash
 jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
@@ -566,9 +610,28 @@ $ curl -s http://localhost:8889
 - 도커 컨테이너는 가상 서버안에서 실행되므로, 외부(내 PC, 호스트)에서 컨테이너 내부의 서비스에 접속하려면 포워딩이 필요
 - 예를 들어, 컨테이너 내부의 80번 포트와 내 PC의 8080번 포트로 연결을 해야, 내 PC의 localhost:8080 으로 접속했을 때, 컨테이너 안의 웹서버(80)로 연결된다.
 
+#### ※ 포트 사용 전 사전 점검
+
+- 도커 컨테이너에 포트를 할당하기 전, 호스트 PC 에서 해당 포트(예:8888) 가 이미 사용 중인지 확인해야함
+- 특정 포트를 점유 중인 프로세스 확인:
+
+```bash
+jinnnii@USERO MINGW64 /d/02.Projects/17.codyssey (main)
+$ netstat -ano | findstr 8888
+  TCP    0.0.0.0:8888           0.0.0.0:0              FIN_WAIT_1      32060
+  TCP    [::]:8888              [::]:0                 FIN_WAIT_1      32060
+```
+
+- 점유 중인 프로세스 강제 종료:
+
+```bash
+jinnnii@USER MINGW64 /d/02.Projects/17.codyssey (main)
+$ kill -9 32060
+```
+
 #### ※ 네트워크 종류
 
-- `bridge`: 독립된 가상 공유기(네트워크 대역), 내 컴퓨터 내부 컨테이너끼리들만 통신 가능
+- `bridge`: 독립된 가상 공유기(네트워크 대역), 포트포워딩이 필수, 내 컴퓨터 내부 컨테이너끼리들만 통신 가능
 - `host`: 실제 공유기(네트워크 대역) , 포트포워딩없이 내 PC포트를 그대로 사용
 - `none`: 외부와 완전 격리
 - `overlay`: 여러 대의 서로 다른 물리 서버에 물린 컨테이너들을 묶어주는 네트워크(대규모)
@@ -615,6 +678,26 @@ $ curl -s http://localhost:8889
 - 도커 컨테이너는 삭제되면 그 안의 데이터도 같이 사라진다는 '휘발성' 특징이 있다.
 - 이때, 데이터를 영구적으로 보관하기 위해 볼륨을 사용
 
+#### ※ 명시적 볼륨 설정
+
+- 바운드 마운트 외에 도커가 직접 관리하는 Named Volume 을 사용할 수도 있다.
+- 도커 볼륨 생성:
+
+```bash
+$ docker volume create my-volume
+```
+
+- 볼륨 마운트 설정 및 컨테이너 실행
+
+```bash
+$ docker run -d --name compose-web-2 -v my-volume:/usr/share/nginx/html
+
+# 또는 yaml 에서
+volumes:
+  my-volume:
+    external: true # 이미 생성된 볼륨 사용 시
+```
+
 ### 10. Git 설정 및 GitHub 연동
 
 ```bash
@@ -656,15 +739,6 @@ core.logallrefupdates=true
 
 ```
 
-- 깃 커밋 및 푸시
-
-```bash
-git status
-git add .
-git commit -m "First Commit"
-git push origin main
-```
-
 #### ※ Git 과 Github 차이
 
 - Git: 로컬 버전 관리 도구, 내 컴퓨터 안에서 파일의 변경 이력을 기록, 관리
@@ -675,13 +749,13 @@ git push origin main
 ### 이슈 1. `git clone` 시 마침표(`.`) 붙였을 때 기존 파일로 인한 클론 실패
 
 - **현상:** `git clone <URL> .` 명령어로 현재 작업 디렉터리에 직접 클론을 시도했으나, `fatal: destination path '.' already exists and is not an empty directory` 에러가 발생하며 클론이 진행되지 않음.
-- **원인 가설:** Git은 마침표(`.`)를 이용해 현재 디렉터리에 직접 클론할 때, 해당 디렉터리가 완벽히 비어있는 상태여야만 안전하게 파일들을 풀도록 안전 장치가 되어 있음. 기존에 생성해둔 폴더나 숨김 파일 등이 존재하여 발생.
+- **원인:** Git은 마침표(`.`)를 이용해 현재 디렉터리에 직접 클론할 때, 해당 디렉터리가 완벽히 비어있는 상태여야만 안전하게 파일들을 풀도록 안전 장치가 되어 있음. 기존에 생성해둔 폴더나 숨김 파일 등이 존재하여 발생.
 - **해결:** 작업 중이던 기존 폴더 내부의 불필요한 파일을 정리하여 완전히 빈 디렉터리로 만든 후, `git clone <URL> .`을 다시 실행하여 정상적으로 로컬 저장소를 동기화함.
 
 ### 이슈 2. `docker-compose.yml` 작성 시 배열 항목의 `-` 누락 구문 에러
 
 - **현상:** `docker compose up -d` 구동 시 YAML 파싱 오류가 발생하며 컨테이너가 정상적으로 구동되지 않음.
-- **원인 가설:** `docker-compose.yml` 내에서 여러 개를 정의해야 하는 속성들(예: `ports`, `volumes`, `networks` 등)은 YAML 스펙상 리스트 형태인 대시(`-`) 기호로 작성해야 하나, 단일 문자열로 작성하여 구문 해석 실패함.
+- **원인:** `docker-compose.yml` 내에서 여러 개를 정의해야 하는 속성들(예: `ports`, `volumes`, `networks` 등)은 YAML 스펙상 리스트 형태인 대시(`-`) 기호로 작성해야 하나, 단일 문자열로 작성하여 구문 해석 실패함.
 - **해결:** 리스트 형태가 필요한 속성 하단에 대시(`-`) 포맷을 올바르게 기입하여 리스트 배열 형태로 구문을 정정함.
 
     ```yaml
